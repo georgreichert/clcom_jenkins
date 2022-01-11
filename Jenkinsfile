@@ -7,5 +7,11 @@ pipeline {
                 sh 'java Program'
             }
         }
+        stage('test') {
+            steps {
+                sh 'javac Tests.java'
+                sh 'java -ea Tests'
+            }
+        }
     }
 }
