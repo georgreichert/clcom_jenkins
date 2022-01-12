@@ -51,8 +51,8 @@ pipeline {
         }
         unstable {
             mail to: 'if20b260@technikum-wien.at',
-                 subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "UNSTABLE - build was built through user input ${env.BUILD_URL}"
+                 subject: "Unstable Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "UNSTABLE - build was deployed by user input ${env.BUILD_URL}"
         }
         failure {
             mail to: 'if20b260@technikum-wien.at',
