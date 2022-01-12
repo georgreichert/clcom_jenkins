@@ -8,6 +8,6 @@ public class Program {
     }
 
     public static int SubtractInt(int a, int b) {
-        return a + b;
+        return a - b;
     }
 }
