@@ -47,17 +47,17 @@ pipeline {
         success {
             mail to: 'if20b260@technikum-wien.at',
                  subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "Everything went well with ${env.BUILD_URL}"
+                 body: "SUCCESS - Everything went well with ${env.BUILD_URL}"
         }
         unstable {
             mail to: 'if20b260@technikum-wien.at',
                  subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "Everything went well with ${env.BUILD_URL}"
+                 body: "UNSTABLE - build was built through user input ${env.BUILD_URL}"
         }
         failure {
             mail to: 'if20b260@technikum-wien.at',
                  subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "Something is wrong with ${env.BUILD_URL}"
+                 body: "FAILURE - Something is wrong with ${env.BUILD_URL}"
         }
         changed {
             echo 'There have been changes since the last build.'
