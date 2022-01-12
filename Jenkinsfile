@@ -22,7 +22,7 @@ pipeline {
         }
         stage('confirmation') {
             steps {
-                if (currentBuild.result = 'UNSTABLE') {
+                if (currentBuild.result == 'UNSTABLE') {
                     input 'One ore more tests failed, do you want to continue to deploy stage?'
                 } else {
                     input 'All tests passed, do you want to continue to deploy stage?'
