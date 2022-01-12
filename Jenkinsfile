@@ -9,23 +9,27 @@ pipeline {
         }
         stage('test') {
             steps {
-                try {
-                    sh 'javac Tests.java'
-                    sh 'java -ea Tests'
-                }
-                catch (exc) {
-                    echo 'Testing failed!'
-                    echo exc.toString()
-                    currentBuild.result = 'UNSTABLE'
+                script {
+                    try {
+                        sh 'javac Tests.java'
+                        sh 'java -ea Tests'
+                    }
+                    catch (exc) {
+                        echo 'Testing failed!'
+                        echo exc.toString()
+                        currentBuild.result = 'UNSTABLE'
+                    }
                 }
             }
         }
         stage('confirmation') {
             steps {
-                if (currentBuild.result == 'UNSTABLE') {
-                    input 'One ore more tests failed, do you want to continue to deploy stage?'
-                } else {
-                    input 'All tests passed, do you want to continue to deploy stage?'
+                script {
+                    if (currentBuild.result == 'UNSTABLE') {
+                        input 'One ore more tests failed, do you want to continue to deploy stage?'
+                    } else {
+                        input 'All tests passed, do you want to continue to deploy stage?'
+                    }
                 }
             }
         }
