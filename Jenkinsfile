@@ -62,5 +62,8 @@ pipeline {
         changed {
             echo 'There have been changes since the last build.'
         }
+        unchanged {
+            echo 'There have been no changes since the last build.'
+        }
     }
 }
