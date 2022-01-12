@@ -9,9 +9,54 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'javac Tests.java'
-                sh 'java -ea Tests'
+                try {
+                    sh 'javac Tests.java'
+                    sh 'java -ea Tests'
+                }
+                catch (exc) {
+                    echo 'Testing failed!'
+                    echo exc.toString()
+                    currentBuild.result = 'UNSTABLE'
+                }
             }
+        }
+        stage('confirmation') {
+            steps {
+                if (currentBuild.result = 'UNSTABLE') {
+                    input 'One ore more tests failed, do you want to continue to deploy stage?'
+                } else {
+                    input 'All tests passed, do you want to continue to deploy stage?'
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                echo 'Deploying to server...'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up'
+            deleteDir()
+        }
+        success {
+            mail to: 'if20b260@technikum-wien.at',
+                 subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Everything went well with ${env.BUILD_URL}"
+        }
+        unstable {
+            mail to: 'if20b260@technikum-wien.at',
+                 subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Everything went well with ${env.BUILD_URL}"
+        }
+        failure {
+            mail to: 'if20b260@technikum-wien.at',
+                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Something is wrong with ${env.BUILD_URL}"
+        }
+        changed {
+            echo 'There have been changes since the last build.'
         }
     }
 }
