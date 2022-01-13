@@ -28,7 +28,7 @@ pipeline {
                     if (currentBuild.result == 'UNSTABLE') {
                         mail to: 'if20b260@technikum-wien.at',
                              subject: "Unstable pipeline - Confirmation needed: ${currentBuild.fullDisplayName}",
-                             body: "UNSTABLE - One or more tests failed trying to build, manual confirmation needed for deploy stage ${env.BUILD_URL}.."
+                             body: "UNSTABLE - One or more tests failed trying to build, manual confirmation needed for deploy stage ${env.BUILD_URL + '..'}"
                         input 'One ore more tests failed, do you want to continue to deploy stage?'
                     }
                 }
