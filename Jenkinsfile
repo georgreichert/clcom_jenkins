@@ -27,15 +27,13 @@ pipeline {
                 script {
                     if (currentBuild.result == 'UNSTABLE') {
                         input 'One ore more tests failed, do you want to continue to deploy stage?'
-                    } else {
-                        input 'All tests passed, do you want to continue to deploy stage?'
                     }
                 }
             }
         }
         stage('deploy') {
             steps {
-                echo 'Deploying to server...'
+                echo 'Deploying to external test server...'
             }
         }
     }
