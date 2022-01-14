@@ -7,7 +7,7 @@ public class Program {
         return a + b;
     }
 
-    public static int AddSubtract(int a, int b) {
+    public static int SubtractInt(int a, int b) {
         return a + b;
     }
 }
