@@ -6,4 +6,8 @@ public class Program {
     public static int AddInt(int a, int b) {
         return a + b;
     }
+
+    public static int AddSubtract(int a, int b) {
+        return a + b;
+    }
 }
